@@ -26,8 +26,33 @@ def check_coords(grid_state, entry_list, ords):
             return False
     return True
 
+# word: number value list attruibuted to word.
+# grid: the grid
+# cross_coord: the starting coordinate where the letter at the "start_indice" of "word", will first be placed
+# orientation (tuple): (x,y) +/- 1 in x/y defines the direction ex: (1,1) start to stop of the word heads in the
+# positive increment of the matrix
 
-def solve(numnum_list):
+def place_word(word, grid, cross_coord, start_indice, orientation):
+
+    grid[cross_coord[0]][cross_coord[1]] = word[start_indice]
+    wordlen = len(word)
+
+    xinc_r = 1
+    yinc_r = 1
+    for i in range(start_indice, wordlen):
+        grid[cross_coord[0] + xinc_r * orientation[0]][cross_coord[1] + yinc_r * orientation[1]] = word[i]
+        xinc_r = xinc_r + 1
+        yinc_r = yinc_r + 1
+
+    xinc_l = 1
+    yinc_l = 1
+    for i in range(start_indice, 0, -1):
+        grid[cross_coord[0] + xinc_l * -orientation[0]][cross_coord[1] + yinc_l * -orientation[1]] = word[i]
+
+    return grid
+
+
+def solve(numnum_list, grid):
     """
     IDEA 1: (iterative with comparision?)
     make a number of random states of the board where we initially place a random word in a random spot on the board.
@@ -54,8 +79,22 @@ def solve(numnum_list):
 
     Idea 2 but where all letters start as being linked to every other letter that is the same.
     We trim the links down to a 2-D space, where the solution with the most connections is the best solution.
+    !!!!!!!!!!!!!!!!! THIS WONT WORK AS IT DOESNT CONSIDER 3D SPACE !!!!!!!!!!!!!!!!!!!!!!!!!!
 
     """
+    # idea 1:
+
+    numnum_list
+    rand_dimx = rndm.randint(0, DIMX)
+    rand_dimy = rndm.randint(0, DIMY)
+    rand_start_coords = [rand_dimx, rand_dimy]
+    rand_word
+
+    for
+
+
+
+    for
 
     binChoice = rndm.randint(0, 1)
 
@@ -70,3 +109,4 @@ ord_list = create_ord_list(word_list)
 
 grid = np.zeros((DIMX, DIMY))
 
+output_matrix = solve(ord_list, grid)
